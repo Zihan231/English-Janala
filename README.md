@@ -51,6 +51,8 @@ English-Janala is a modern, responsive **education web app** built to help learn
 <img width="1917" height="938" alt="image" src="https://github.com/user-attachments/assets/415f8946-ceed-4acc-8c04-2f485a4de999" />
 <img width="1919" height="844" alt="image" src="https://github.com/user-attachments/assets/50ecfa03-5fc9-4efe-a777-25a507102189" />
 <img width="1919" height="933" alt="image" src="https://github.com/user-attachments/assets/dd5d8058-e729-436b-9a2c-9685a98195d5" />
+<img width="1919" height="938" alt="image" src="https://github.com/user-attachments/assets/530b1a2a-f809-419b-8b7b-91b535293adc" />
+
 
 ### Responsie UI 📱
 <img width="1919" height="939" alt="image" src="https://github.com/user-attachments/assets/ea2216b9-2f2a-4d0b-97ac-d944942945f3" />
