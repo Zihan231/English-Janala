@@ -69,7 +69,7 @@ const LoadLessonLevel = async (id) => {
                   <i class="fa-solid fa-circle-info"></i>
                 </button>
                 <button
-                onclick="pronounceWord(${data.word})"
+                onclick="pronounceWord('${data.word}')"
                 class="bg-[#1A91FF10]"
                   type="button"
                   aria-label="Play pronunciation for Eager"
@@ -90,7 +90,7 @@ const showWords = async (id) => {
   const dt = await r.json();
   const data = dt.data;
   con.innerHTML = `<h1 class="poppins font-semibold md:text-4xl text-3xl">
-            ${data.word}(<i class="fa-solid fa-microphone-lines"></i>:
+            ${data.word}(<i onclick="pronounceWord('${data.word}')" class="fa-solid fa-microphone-lines"></i>:
             <span class="bangla">${data.pronunciation}</span> )
           </h1>
           <div class="my-6 md:my-8">
@@ -132,18 +132,25 @@ const hideElementByID = (id) => {
   document.getElementById(id).style.display = "none";
 };
 function pronounceWord(word) {
-  console.log("im");
+
   const utterance = new SpeechSynthesisUtterance(word);
-  utterance.lang = "en-EN"; // English
+  utterance.lang = "en-US"; // better code than en-EN
+
+  // pick a specific voice if available
+  const voices = window.speechSynthesis.getVoices();
+  if (voices.length > 0) {
+    utterance.voice = voices.find(v => v.lang.startsWith("en")) || voices[0];
+  }
+
   window.speechSynthesis.speak(utterance);
 }
+// Scroll to FAQ section
 
-// Scroll to FAQ section 
 const ScrollTotheSection = (id) => {
   document.getElementById(id).scrollIntoView({
-    behavior: "smooth"
+    behavior: "smooth",
   });
-}
+};
 document.getElementById("GetstartedBtn").addEventListener("click", (e) => {
- e.preventDefault();
-})
+  e.preventDefault();
+});
