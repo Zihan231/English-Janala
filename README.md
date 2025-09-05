@@ -8,7 +8,7 @@ English-Janala is a modern, responsive **education web app** built to help learn
 
 ## 🚀 Live Demo
 
-👉 [English-Janala Live](https://zihan231.github.io/English-Janala/)
+👉 <a href="https://zihan231.github.io/English-Janala/" target="_blank">English-Janala Live</a>
 
 ---
 
