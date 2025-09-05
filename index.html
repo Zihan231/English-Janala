@@ -1,11 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>English Janala</title>
-</head>
-<body>
-    
-</body>
+    <!-- DaisyUi + Tailwind CDN-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Font Awesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- StyleSheet -->
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="navbar bg-base-100 shadow-sm md:px-20 bg-[#badeff42]">
+        <div class="navbar-start">
+          <div class="dropdown">
+            <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </div>
+            <ul
+              tabindex="0"
+              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-30 p-1 shadow gap-2"
+            >
+              <li>
+                <button class="btn btn-outline btn-primary">
+                  <i class="fa-solid fa-circle-question"></i> FAQ
+                </button>
+              </li>
+              <li>
+                <button class="btn btn-outline btn-primary">
+                  <i class="fa-solid fa-book-open"></i> Learn
+                </button>
+              </li>
+              <li>
+                <button class="btn btn-outline btn-primary">
+                  <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+              </li>
+            </ul>
+          </div>
+          <a class="btn btn-ghost text-xl"
+            ><span class="poppins font-semibold">English</span
+            ><img src="./assets/logo.png" alt="Logo" /><span
+              class="bangla font-normal"
+              >জানালা</span
+            ></a
+          >
+        </div>
+        <div class="navbar-end hidden lg:flex">
+          <ul class="menu menu-horizontal px-1 gap-4">
+            <li>
+              <button class="btn btn-outline btn-primary">
+                <i class="fa-solid fa-circle-question"></i> FAQ
+              </button>
+            </li>
+            <li>
+              <button class="btn btn-outline btn-primary">
+                <i class="fa-solid fa-book-open"></i> Learn
+              </button>
+            </li>
+            <li>
+              <button class="btn btn-outline btn-primary">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <!-- banner -->
+    <section
+      class="flex flex-col-reverse justify-center items-center my-4 mx-4 md:flex-row md:mx-16 md:gap-[200px]"
+    >
+      <div class="md:w-[40%] md:text-left text-center">
+        <h1 class="font-bold mb-1 text-[22px] md:text-5xl md:mb-6">
+          <span class="text-[#00BCFF]">English</span> is Easy!!
+        </h1>
+        <p class="mb-4 md:mb-6">
+          আজ থেকেই আপনার ভাষা শেখার যাত্রা শুরু করুন। আপনি যদি নতুন হন অথবা
+          আপনার দক্ষতা বাড়াতে চান, আমাদের Interactive Lessons আপনাকে নিয়ে যাবে
+          অন্য একটি Level এ
+        </p>
+        <form action="" class="flex flex-col gap-4 w-sm mx-auto md:mx-0">
+          <input
+            class="rounded-sm py-3 border-1 border-gray-200 px-2"
+            type="text"
+            name="userName"
+            id="userName"
+            placeholder="Enter your name"
+          />
+          <input
+            class="rounded-sm py-3 border-1 border-gray-200 px-2"
+            type="password"
+            name="userPass"
+            id="userPass"
+            placeholder="Enter your password"
+          />
+          <button class="btn btn-primary md:w-1/2">Get Started</button>
+        </form>
+      </div>
+      <!-- Img -->
+      <div class="md:w-[60%]">
+        <img src="./assets/hero-student.png" alt="Hero Img" />
+      </div>
+    </section>
+    <!-- Lesson Section -->
+    <section class="mt-12 border-0 md:mx-16 mb-14">
+      <div>
+        <h1 class="font-bold mb-1 text-[22px] md:text-5xl text-center md:mb-6">
+          <span class="text-[#00BCFF]">Let's</span> Learn Vocabularies
+        </h1>
+        <ul
+          id="Lesson-container"
+          class="px-1 gap-4 flex justify-center flex-wrap my-8"
+        >
+          <!-- Dynamic Lessons goes here -->
+        </ul>
+      </div>
+      <!-- Lesson / Cards Section -->
+      <section class="text-center py-4 mx-2" aria-labelledby="lesson-heading">
+        <div id="lesson-heading-Container" class="bg-gray-200">
+          <p id="noSelect" class="bangla text-[#79716B] text-sm mb-1 pt-10">
+            আপনি এখনো কোন Lesson Select করেন নি
+          </p>
+          <h1 id="plzSelect" class="bangla text-4xl pb-10">
+            একটি Lesson Select করুন।
+          </h1>
+        </div>
+        <!-- cards Container -->
+        <ul
+          class="md:flex flex-wrap justify-center items-center gap-4"
+          id="cards-list"
+          role="list"
+        >
+          <!-- Cards will be added dynamically  -->
+        </ul>
+      </section>
+    </section>
+    <dialog id="Word_info" class="modal modal-center sm:modal-middle">
+      <div class="modal-box rounded-4xl w-[400px] md:w-[80%] mx-auto">
+        <div id="detailcontainer" class="p-3">
+          <!-- <h1 class="poppins font-semibold md:text-4xl text-3xl">
+            Eager(<i class="fa-solid fa-microphone-lines"></i>:
+            <span class="bangla">ইগার</span>)
+          </h1>
+          <div class="my-6 md:my-8">
+            <h2 class="font-semibold text-xl md:text-2xl poppins mb-3">
+              Meaning
+            </h2>
+            <p class="bangla font-medium text-xl md:text-2xl">আগ্রহী</p>
+          </div>
+          <div class="mb-8">
+            <h2 class="font-semibold text-xl md:text-2xl poppins mb-3">
+              Example
+            </h2>
+            <p class="font-normal text-base md:text-lg poppins">
+              The kids were eager to open their gifts.
+            </p>
+          </div>
+          <div class="">
+            <h1 class="bangla text-xl md:text-2xl font-semibold mb-4">
+              সমার্থক শব্দ গুলো
+            </h1>
+            <div class="gap-3 grid grid-cols-2 md:grid-cols-3">
+              <p
+                class="bg-[#D7E4EF] px-3 py-1 rounded-md border-1 border-gray-300 poppins text-center overflow-auto"
+              >
+                Enthusiastic
+              </p>
+            </div>
+          </div> -->
+        </div>
+        <div class="modal-action justify-start mb-3">
+          <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button
+              class="btn btn-primary text-white rounded-[10px] poppinis text-lg"
+            >
+              Complete Learning
+            </button>
+          </form>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="./script.js"></script>
+  </body>
 </html>
