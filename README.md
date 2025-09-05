@@ -29,13 +29,15 @@ English-Janala is a modern, responsive **education web app** built to help learn
 
 ## 🛠 Tech Stack
 
-- **Frontend**: HTML5, CSS3, TailwindCSS (DaisyUI)  
-- **Icons**: Font Awesome  
-- **Fonts**: Google Fonts — Poppins & Tiro Bangla  
-- **JavaScript**:  
-  - ⚡ Fetch API (dynamic lesson & word loading)  
-  - 🔊 Web Speech API (`speechSynthesis`) for voice pronunciation  
-  - 🖱 DOM manipulation, event handling, smooth scrolling, modals  
+- **Frontend:** HTML5, CSS3, TailwindCSS, DaisyUI  
+- **Icons:** Font Awesome  
+- **Fonts:** Google Fonts (Poppins & Tiro Bangla)  
+- **JavaScript Features:**  
+  - ⚡ Fetch API (for lessons & word details)  
+  - 🔊 Web Speech API (for real-time pronunciation)  
+  - 🖱 DOM manipulation for rendering lessons/cards dynamically  
+  - 🪟 Modal dialogs for word details  
+  - 📜 Smooth scrolling with `scrollIntoView`  
 
 ---
 
