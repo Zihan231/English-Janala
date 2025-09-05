@@ -6,3 +6,8 @@
 .bangla {
   font-family: "Tiro Bangla", serif;
 }
+.collapse-title,
+.collapse-content {
+  font-family: 'Poppins', sans-serif;
+}
+

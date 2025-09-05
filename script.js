@@ -47,12 +47,16 @@ const LoadLessonLevel = async (id) => {
             class="border-1 border-gray-400 rounded-xl md:flex justify-center items-center flex-wrap gap-4 my-2"
           >
             <div class="p-5">
-              <h2 class="Poppins font-bold text-xl mb-5">${data.word? data.word:"No Word Found"}</h2>
+              <h2 class="Poppins font-bold text-xl mb-5">${
+                data.word ? data.word : "No Word Found"
+              }</h2>
               <p class="Poppins font-semibold text-lg mb-5">
                 Meaning/Pronunciation
               </p>
               <h1 class="bangla font-bold text-xl text-[#18181B]">
-                "${data.meaning? data.meaning : "No Meaning Found" } / ${data.pronunciation? data.pronunciation:"No Pronunciation Found"}"
+                "${data.meaning ? data.meaning : "No Meaning Found"} / ${
+      data.pronunciation ? data.pronunciation : "No Pronunciation Found"
+    }"
               </h1>
               <div class="flex justify-between text-[#374957]">
                 <button
@@ -65,6 +69,7 @@ const LoadLessonLevel = async (id) => {
                   <i class="fa-solid fa-circle-info"></i>
                 </button>
                 <button
+                onclick="pronounceWord(${data.word})"
                 class="bg-[#1A91FF10]"
                   type="button"
                   aria-label="Play pronunciation for Eager"
@@ -78,24 +83,30 @@ const LoadLessonLevel = async (id) => {
     container.appendChild(li);
   }
 };
-const showWords = (id) => {
+const showWords = async (id) => {
   const con = document.getElementById("detailcontainer");
+  const url = `https://openapi.programming-hero.com/api/word/${id}`;
+  const r = await fetch(url);
+  const dt = await r.json();
+  const data = dt.data;
   con.innerHTML = `<h1 class="poppins font-semibold md:text-4xl text-3xl">
-            Eager(<i class="fa-solid fa-microphone-lines"></i>:
-            <span class="bangla">ইগার</span>)
+            ${data.word}(<i class="fa-solid fa-microphone-lines"></i>:
+            <span class="bangla">${data.pronunciation}</span> )
           </h1>
           <div class="my-6 md:my-8">
             <h2 class="font-semibold text-xl md:text-2xl poppins mb-3">
               Meaning
             </h2>
-            <p class="bangla font-medium text-xl md:text-2xl">আগ্রহী</p>
+            <p class="bangla font-medium text-xl md:text-2xl">${
+              data.meaning
+            }</p>
           </div>
           <div class="mb-8">
             <h2 class="font-semibold text-xl md:text-2xl poppins mb-3">
               Example
             </h2>
             <p class="font-normal text-base md:text-lg poppins">
-              The kids were eager to open their gifts.
+              ${data.sentence}
             </p>
           </div>
           <div class="">
@@ -103,17 +114,26 @@ const showWords = (id) => {
               সমার্থক শব্দ গুলো
             </h1>
             <div class="gap-3 grid grid-cols-2 md:grid-cols-3">
-              <p
+            ${data.synonyms
+              .map((x) => {
+                return `<p
                 class="bg-[#D7E4EF] px-3 py-1 rounded-md border-1 border-gray-300 poppins text-center overflow-auto"
               >
-                Enthusiastic
-              </p>
+                ${x}
+              </p>`;
+              })
+              .join("")}
             </div>
           </div>`;
   document.getElementById("Word_info").showModal();
-}
-  // document.getElementById("Word_info").showModal();
+};
+// document.getElementById("Word_info").showModal();
 const hideElementByID = (id) => {
-  const url = `https://openapi.programming-hero.com/api/word/${id}`;
   document.getElementById(id).style.display = "none";
 };
+function pronounceWord(word) {
+  console.log("im");
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
