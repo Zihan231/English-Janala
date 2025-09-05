@@ -1,4 +1,4 @@
-# 🌐 English জানালা (English Janala)
+# 🌐 English ![Img](https://github.com/Zihan231/English-Janala/blob/main/assets/logo.png) জানালা (English Janala)
 
 **Learn English Easily & Interactively!**
 
