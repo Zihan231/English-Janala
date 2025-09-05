@@ -137,3 +137,13 @@ function pronounceWord(word) {
   utterance.lang = "en-EN"; // English
   window.speechSynthesis.speak(utterance);
 }
+
+// Scroll to FAQ section 
+const ScrollTotheSection = (id) => {
+  document.getElementById(id).scrollIntoView({
+    behavior: "smooth"
+  });
+}
+document.getElementById("GetstartedBtn").addEventListener("click", (e) => {
+ e.preventDefault();
+})
