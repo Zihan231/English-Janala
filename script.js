@@ -1,3 +1,4 @@
+// Load the Lesson Levels
 const loadLesson = () => {
   const url = "https://openapi.programming-hero.com/api/levels/all";
   fetch(url)
@@ -17,7 +18,9 @@ const loadLesson = () => {
     });
 };
 loadLesson();
+// Words By level
 const LoadLessonLevel = async (id) => {
+  LoadSpinner(true);
   const btns = document.getElementsByClassName("lev-btn");
   for (btn of btns) {
     btn.classList.add("btn-outline");
@@ -39,6 +42,7 @@ const LoadLessonLevel = async (id) => {
           <h1 id="plzSelect" class="pb-10 bangla text-4xl">
             নেক্সট Lesson এ যান।
           </h1>`;
+    LoadSpinner(false);
     return;
   }
   for (data of dt.data) {
@@ -48,19 +52,19 @@ const LoadLessonLevel = async (id) => {
           >
             <div class="p-5">
               <h2 class="Poppins font-bold text-xl mb-5">${
-                data.word ? data.word : "No Word Found"
+                data.word ? data.word : `<span class="text-red-400">No word found</span>`
               }</h2>
               <p class="Poppins font-semibold text-lg mb-5">
                 Meaning/Pronunciation
               </p>
               <h1 class="bangla font-bold text-xl text-[#18181B]">
-                "${data.meaning ? data.meaning : "No Meaning Found"} / ${
-      data.pronunciation ? data.pronunciation : "No Pronunciation Found"
+                "${data.meaning ? data.meaning : `<span class="text-red-400">No meaning found</span>`} / ${
+      data.pronunciation ? data.pronunciation : `<span class="text-red-400">No Pronunciation Found</span>`
     }"
               </h1>
               <div class="flex justify-between text-[#374957]">
                 <button
-                class="bg-[#1A91FF10]"
+                class="bg-[#1A91FF10] hover:bg-slate-300 p-2"
                   onclick="showWords(${data.id})"
                   type="button"
                   aria-label="More info about Eager"
@@ -70,7 +74,7 @@ const LoadLessonLevel = async (id) => {
                 </button>
                 <button
                 onclick="pronounceWord('${data.word}')"
-                class="bg-[#1A91FF10]"
+                class="bg-[#1A91FF10] hover:bg-slate-300 p-2"
                   type="button"
                   aria-label="Play pronunciation for Eager"
                   title="Play"
@@ -81,8 +85,20 @@ const LoadLessonLevel = async (id) => {
             </div>
           </li>`;
     container.appendChild(li);
+    LoadSpinner(false);
   }
 };
+// Load Spinner
+const LoadSpinner = (flag) => {
+  if (flag) {
+    document.getElementById("Spinner").classList.remove("hidden");
+    document.getElementById("LessonSECid").classList.add("hidden");
+  } else {
+    document.getElementById("Spinner").classList.add("hidden");
+    document.getElementById("LessonSECid").classList.remove("hidden");
+  }
+};
+// Load Words Details
 const showWords = async (id) => {
   const con = document.getElementById("detailcontainer");
   const url = `https://openapi.programming-hero.com/api/word/${id}`;
@@ -90,7 +106,9 @@ const showWords = async (id) => {
   const dt = await r.json();
   const data = dt.data;
   con.innerHTML = `<h1 class="poppins font-semibold md:text-4xl text-3xl">
-            ${data.word}(<i onclick="pronounceWord('${data.word}')" class="fa-solid fa-microphone-lines"></i>:
+            ${data.word}(<i onclick="pronounceWord('${
+    data.word
+  }')" class="fa-solid fa-microphone-lines hover:bg-slate-200 py-2"></i>:
             <span class="bangla">${data.pronunciation}</span> )
           </h1>
           <div class="my-6 md:my-8">
@@ -98,7 +116,7 @@ const showWords = async (id) => {
               Meaning
             </h2>
             <p class="bangla font-medium text-xl md:text-2xl">${
-              data.meaning
+              data.meaning ? data.meaning : `<span class="text-red-400">No meaning found</span>`
             }</p>
           </div>
           <div class="mb-8">
@@ -114,15 +132,18 @@ const showWords = async (id) => {
               সমার্থক শব্দ গুলো
             </h1>
             <div class="gap-3 grid grid-cols-2 md:grid-cols-3">
-            ${data.synonyms
-              .map((x) => {
-                return `<p
-                class="bg-[#D7E4EF] px-3 py-1 rounded-md border-1 border-gray-300 poppins text-center overflow-auto"
-              >
-                ${x}
-              </p>`;
-              })
-              .join("")}
+            ${
+              data.synonyms.length > 0
+                ? data.synonyms
+                    .map(
+                      (x) =>
+                        `<p class="bg-[#D7E4EF] px-3 py-1 rounded-md border-1 border-gray-300 poppins text-center overflow-auto">
+            ${x}
+          </p>`
+                    )
+                    .join("")
+                : `<p class="bg-[#f89090] w-[300px] px-8 py-1 rounded-md border-1 border-gray-300 poppins text-center">No Synonyms Found</p>`
+            }
             </div>
           </div>`;
   document.getElementById("Word_info").showModal();
@@ -131,26 +152,26 @@ const showWords = async (id) => {
 const hideElementByID = (id) => {
   document.getElementById(id).style.display = "none";
 };
+// Pronounce Words
 function pronounceWord(word) {
-
   const utterance = new SpeechSynthesisUtterance(word);
   utterance.lang = "en-US"; // better code than en-EN
 
   // pick a specific voice if available
   const voices = window.speechSynthesis.getVoices();
   if (voices.length > 0) {
-    utterance.voice = voices.find(v => v.lang.startsWith("en")) || voices[0];
+    utterance.voice = voices.find((v) => v.lang.startsWith("en")) || voices[0];
   }
 
   window.speechSynthesis.speak(utterance);
 }
 // Scroll to FAQ section
-
 const ScrollTotheSection = (id) => {
   document.getElementById(id).scrollIntoView({
     behavior: "smooth",
   });
 };
+// Prevent Button's default behavior
 document.getElementById("GetstartedBtn").addEventListener("click", (e) => {
   e.preventDefault();
 });
